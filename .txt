@@ -1,0 +1,15 @@
+npm init
+
+npm install --save express
+
+npm install --save nodemon
+
+npm install --save sequelize
+
+npx sequelize-cli init:models
+
+npx sequelize-cli init:config
+
+npm install --save dotenv
+
+npm install --save mysql2
