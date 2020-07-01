@@ -1,26 +1,38 @@
 const express = require('express');
 const bcrypt = require('bcrypt');
 const { Account } = require('../models');
-const { accountSignUp } = require('../validators/account');
+const { accountSignUp, accountSignIn } = require('../validators/account');
 const { getMessage } = require('../helpers/messages');
+const { generateJwt, generateRefreshJwt } = require('../helpers/jwt');
 
 const router = express.Router();
 
 const saltRounds = 10;
 
-router.get('/signIn', (req, res) => {
-  res.jsonOK(null);
-});
-
-router.get('/signUp', accountSignUp, async (req, res) => {
+router.post('/signIn', accountSignIn, async (req, res) => {
   const { email, password } = req.body;
 
   const account = await Account.findOne({ where: { email } });
-  // if (account) return res.jsonBadRequest(null, 'Account already exists');
+
+  const match = account ? bcrypt.compareSync(password, account.password) : null;
+  if (!match)
+    return res.jsonBadRequest(null, getMessage('account.signin.invalid'));
+
+  const token = generateJwt({ id: account.id });
+  const refreshToken = generateRefreshJwt({ id: account.id });
+
+  res.jsonOK(account, getMessage('account.signin.success'), {
+    token,
+    refreshToken,
+  });
+});
+
+router.post('/signUp', accountSignUp, async (req, res) => {
+  const { email, password } = req.body;
+
+  const account = await Account.findOne({ where: { email } });
   if (account)
     return res.jsonBadRequest(null, getMessage('account.signup.email_exists'));
-  // const email = 'tst@tst.com';
-  // const password = '123456';
 
   const hash = bcrypt.hashSync(password, saltRounds);
 
@@ -29,12 +41,13 @@ router.get('/signUp', accountSignUp, async (req, res) => {
     password: hash,
   });
 
-  // Account.create({ email: 'tst@tst.com', password: '123456' }).then().catch();
+  const token = generateJwt({ id: newAccount.id });
+  const refreshToken = generateRefreshJwt({ id: newAccount.id });
 
-  // res.json('Sing Up');
-  // return res.jsonOK(newAccount, 'Account created !');
-  return res.jsonOK(newAccount, getMessage('account.signup.success'));
-  // res.json({ email, password: hash });
+  return res.jsonOK(newAccount, getMessage('account.signup.success'), {
+    token,
+    refreshToken,
+  });
 });
 
 module.exports = router;

@@ -4,6 +4,14 @@
   "response.json_unauthorized": "Unauthorized.",
   "response.json_not_found": "Not found.",
   "response.json_server_error": "Server error.",
+
+  "account.signin.invalid": "Invalid credentials.",
+  "account.signin.success": "Successfully Signed In.",
+  "account.signin.email.string.empty": "Email is required.",
+  "account.signin.email.string.email": "Email is not valid.",
+  "account.signin.password.string.empty": "Password required.",
+  "account.signin.password.string.pattern.base": "Password must contain between 3 and 30 characters and include letters and number.",
+
   "account.signup.email_exists": "Email already registered.",
   "account.signup.success": "Registration successfully completed.",
   "account.signup.email.string.empty": "Email is required.",

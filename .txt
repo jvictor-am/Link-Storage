@@ -18,6 +18,10 @@ npm install --save bcrypt
 
 npm install --save @hapi/joi
 
+npm install --save jsonwebtoken
+
+
+
 // "account.signup.email_exists": "Email já cadastrado.",
 // "account.signup.success": "Cadastro efetuado com sucesso.",
 // "account.signup.email.string.empty": "Email é obrigatório.",
