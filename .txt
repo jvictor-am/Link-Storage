@@ -15,3 +15,13 @@ npm install --save dotenv
 npm install --save mysql2
 
 npm install --save bcrypt
+
+npm install --save @hapi/joi
+
+// "account.signup.email_exists": "Email já cadastrado.",
+// "account.signup.success": "Cadastro efetuado com sucesso.",
+// "account.signup.email.string.empty": "Email é obrigatório.",
+// "account.signup.email.string.email": "Email não é válido.",
+// "account.signup.password_confirmation.any.required": "Confirmação de senha é obrigatória.",
+// "account.signup.password.string.empty": "Senha é obrigatória.",
+// "account.signup.password.string.pattern.base": "Senha deve conter entre 3 a 30 caracteres e incluir letras e números."
