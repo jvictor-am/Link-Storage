@@ -1,0 +1,68 @@
+@baseUrl = http://localhost:3001
+
+@contentType = application/json
+
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwiaWF0IjoxNTkzNjc5NDg0LCJleHAiOjE1OTM2ODEyODR9.6RLk99V-WUvu_v3pnQNtTiK5Bn8jRPni5YHuC8tXu0Y
+
+@refreshToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MiwidmVyc2lvbiI6MCwiaWF0IjoxNTkzNjc5NDg0LCJleHAiOjE1OTYyNzE0ODR9.X6EHIAVGsyV0kKrVtrZnLj6LqDPAYfBCWwzgu0IXWRA
+
+### Create an Account
+POST {{baseUrl}}/auth/signUp
+Content-Type: {{contentType}}
+
+{
+  "email":"tst6@tst.com",
+  "password":"123456",
+  "password_confirmation":"123456"
+}
+
+### SingIn an Account
+POST {{baseUrl}}/auth/signIn
+Content-Type: {{contentType}}
+
+{
+  "email":"tst2@tst.com",
+  "password":"123456"
+}
+
+### Refresh Token
+POST {{baseUrl}}/auth/refresh
+Content-Type: {{contentType}}
+Authorization: Bearer {{refreshToken}}
+
+### List Links
+GET {{baseUrl}}/link
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+### Create Link
+POST {{baseUrl}}/link
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "label": "LinkedIn2",
+  "url":"https://www.linkedin.com/in/jo%C3%A3o-victor-de-andrade-mesquita-848a09122/",
+  "isSocial": false
+}
+
+### Get a link by id
+GET {{baseUrl}}/link/2
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+### Update a link
+PUT {{baseUrl}}/link/6
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}
+
+{
+  "label": "GitHub2",
+  "url":"https://github.com/jvictor-am",
+  "isSocial":"true"
+}
+
+### Delete link by id
+DELETE {{baseUrl}}/link/5
+Content-Type: {{contentType}}
+Authorization: Bearer {{token}}

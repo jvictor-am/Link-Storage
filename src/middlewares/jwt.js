@@ -8,8 +8,6 @@ const checkJwt = (req, res, next) => {
   if (isExcluded) return next();
 
   const token = getTokenFromHeaders(req.headers);
-
-  token = token ? token.slice(7, token.length) : null;
   if (!token) {
     return res.jsonUnauthorized(null, 'Invalid token');
   }
