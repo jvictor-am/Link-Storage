@@ -26,6 +26,8 @@ npx sequelize-cli db:migrate
 
 npx sequelize-cli db:migrate:undo
 
+npm install --save cors
+
 // "account.signup.email_exists": "Email já cadastrado.",
 // "account.signup.success": "Cadastro efetuado com sucesso.",
 // "account.signup.email.string.empty": "Email é obrigatório.",
