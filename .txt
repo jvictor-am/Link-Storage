@@ -20,7 +20,11 @@ npm install --save @hapi/joi
 
 npm install --save jsonwebtoken
 
+npx sequelize-cli migration:create --name add_jwtVersion_to_account
 
+npx sequelize-cli db:migrate
+
+npx sequelize-cli db:migrate:undo
 
 // "account.signup.email_exists": "Email já cadastrado.",
 // "account.signup.success": "Cadastro efetuado com sucesso.",

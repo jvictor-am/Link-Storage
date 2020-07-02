@@ -19,7 +19,10 @@ router.post('/signIn', accountSignIn, async (req, res) => {
     return res.jsonBadRequest(null, getMessage('account.signin.invalid'));
 
   const token = generateJwt({ id: account.id });
-  const refreshToken = generateRefreshJwt({ id: account.id });
+  const refreshToken = generateRefreshJwt({
+    id: account.id,
+    version: account.jwtVersion,
+  });
 
   res.jsonOK(account, getMessage('account.signin.success'), {
     token,
@@ -42,7 +45,10 @@ router.post('/signUp', accountSignUp, async (req, res) => {
   });
 
   const token = generateJwt({ id: newAccount.id });
-  const refreshToken = generateRefreshJwt({ id: newAccount.id });
+  const refreshToken = generateRefreshJwt({
+    id: newAccount.id,
+    version: newAccount.jwtVersion,
+  });
 
   return res.jsonOK(newAccount, getMessage('account.signup.success'), {
     token,

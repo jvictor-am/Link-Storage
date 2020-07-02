@@ -9,13 +9,13 @@ const linkController = require('./controllers/link');
 const app = express();
 
 app.use(response);
-// app.use(checkJwt);
+app.use(checkJwt);
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use('/auth', authController);
-app.use(checkJwt);
+// app.use(checkJwt);
 app.use('/link', linkController);
 
 app.get('/', (req, res) => {
